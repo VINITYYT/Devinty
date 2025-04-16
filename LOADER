@@ -1,0 +1,45 @@
+local KeyValid = false
+local savedKeyPath = "VinitysConfig/key.txt"
+
+_G = loadstring(game:HttpGet("https://raw.githubusercontent.com/VINITYYT/VinitysNotifyModual/main/Modual.lua"))()
+-- Auto-check saved key before UI
+if isfile(savedKeyPath) then
+	local content = readfile(savedKeyPath)
+	if content == "aZ9xQ1rT" then
+		_G.VinitysNotificationSystem("Auto-loaded Valid Key.")
+		KeyValid = true
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/VINITYYT/Devinty/refs/heads/main/MicUpGui'))()
+		else
+		_G.VinitysNotificationSystem("InValid Key.")
+	end
+end
+
+-- Only show key UI if key not valid
+if not KeyValid then
+	local KeySystem = loadstring(game:HttpGet("https://raw.githubusercontent.com/OopssSorry/LuaU-Free-Key-System-UI/main/source.lua"))()
+
+	local response = KeySystem:Init({
+		Debug = false,
+		Title = "Vinitys Hub",
+		Description = nil,
+		Link = "",
+		Discord = nil,
+		SaveKey = false,
+		Verify = function(key)
+			if key == "aZ9xQ1rT" then
+				KeyValid = true
+				if not isfolder("VinitysConfig") then
+					makefolder("VinitysConfig")
+				end
+				writefile(savedKeyPath, key)
+				return true
+			else
+				return false
+			end
+		end,
+		GuiParent = game.CoreGui,
+	})
+
+	if not response or not KeyValid then return end
+end
+
