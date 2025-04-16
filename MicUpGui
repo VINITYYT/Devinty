@@ -1,0 +1,51 @@
+local DiscordLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt"))()
+_G = loadstring(game:HttpGet("https://raw.githubusercontent.com/VINITYYT/VinitysNotifyModual/main/Modual.lua"))()
+
+local RS = game:GetService("ReplicatedStorage")
+
+local Events = {
+    Fast = RS.FastEvent,
+    Flat = RS.FlatEvent,
+    Huge = RS.HugeEvent,
+    Wide = RS.WideEvent,
+    Tall = RS.TallEvent,
+    Regular = RS.RegularEvent
+}
+
+local win = DiscordLib:Window("Devine Gui")
+local serv = win:Server("Preview", "")
+local btns = serv:Channel("Buttons")
+local bnds = serv:Channel("Binds")
+
+-- Buttons
+btns:Button("Wide", function()
+    Events.Wide:FireServer()
+    _G.VinitysNotificationSystem("Made Player Wide")
+end)
+
+btns:Button("Fast", function()
+    Events.Fast:FireServer()
+    _G.VinitysNotificationSystem("Made Player Fast")
+end)
+
+btns:Button("Flat", function()
+    Events.Flat:FireServer()
+    _G.VinitysNotificationSystem("Made Player Flat")
+end)
+
+btns:Button("Huge", function()
+    Events.Huge:FireServer()
+    _G.VinitysNotificationSystem("Made Player Huge")
+end)
+
+btns:Button("Regular", function()
+    Events.Regular:FireServer()
+    _G.VinitysNotificationSystem("Reset to Regular Size")
+end)
+
+-- Keybind
+bnds:Bind("TestBind", Enum.KeyCode.RightShift, function()
+    _G.VinitysNotificationSystem("Test")
+end)
+
+win:Server("Main", "http://www.roblox.com/asset/?id=6031075938")
